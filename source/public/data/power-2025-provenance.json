@@ -1,0 +1,49 @@
+{
+  "scope": "Pre-start research dataset inspection only; not application integration",
+  "request_url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M,T2M_MAX,T2M_MIN,PRECTOTCORR&community=AG&longitude=35.62&latitude=32.16&start=20250101&end=20251231&format=JSON&time-standard=LST",
+  "retrieved_at": "2026-11-13T17:08:24.4223810+00:00",
+  "sha256": "C37A101A5CBF2FCB2CD23665C9E6465848163FD636171B1CCA60744C377C50D1",
+  "response_header": {
+    "title": "NASA/POWER Source Native Resolution Daily Data",
+    "api": {
+      "version": "v2.10.3",
+      "name": "POWER Daily API"
+    },
+    "sources": [
+      "MERRA2",
+      "POWER"
+    ],
+    "fill_value": -999.0,
+    "time_standard": "LST",
+    "start": "20250101",
+    "end": "20251231"
+  },
+  "parameters": {
+    "T2M": {
+      "units": "C",
+      "longname": "Temperature at 2 Meters"
+    },
+    "T2M_MAX": {
+      "units": "C",
+      "longname": "Temperature at 2 Meters Maximum"
+    },
+    "T2M_MIN": {
+      "units": "C",
+      "longname": "Temperature at 2 Meters Minimum"
+    },
+    "PRECTOTCORR": {
+      "units": "mm/day",
+      "longname": "Precipitation Corrected"
+    }
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      35.62,
+      32.16,
+      163.96
+    ]
+  },
+  "messages": [],
+  "processing": "Raw HTTP response saved to disk without transforming values"
+}

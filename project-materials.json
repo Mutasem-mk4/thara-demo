@@ -85,11 +85,15 @@
     ],
     "delivery": [
       "OpenAI Artifact Tool for editable slides",
-      "ChatGPT Sites for static hosting",
+      "GitHub and GitHub Pages for the rebuild source and static hosting",
+      "ChatGPT Sites for the earlier public build",
+      "ReportLab and pypdf for the seven-page slide PDF",
       "OpenAI ImageGen for an archived illustration from an earlier build"
     ]
   },
   "materials": {
+    "rebuild_pptx": "materials/THARA_Rebuild_EN.pptx",
+    "rebuild_pdf": "materials/THARA_Rebuild_EN.pdf",
     "ai_disclosure": "ai-usage.json",
     "licenses_and_attribution": "third-party-notices.txt",
     "demo": "Rebuild English presentation with genuine captured application screenshots, source notes and AI disclosure. Earlier delivery files retain historical scope.",

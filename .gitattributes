@@ -1,0 +1,8 @@
+* text=auto
+*.json text eol=lf
+*-raw.json -text
+*.woff binary
+*.woff2 binary
+*.png binary
+*.pdf binary
+*.pptx binary

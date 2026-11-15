@@ -12,7 +12,8 @@
   ],
   "nasa_source_values_ai_generated": false,
   "synthetic_test_data": "Limited to test fixtures, distinct from NASA records",
-  "generated_image_video_or_audio_in_current_app_and_deck": false,
+  "generated_photograph_video_or_audio_in_current_app_and_deck": false,
+  "code_authored_visuals": "The interface, THARA vector mark and data-chart code were AI-assisted. A visible app footer and screenshot captions disclose this. NASA logos are absent.",
   "historical_generated_media": {
     "tool": "OpenAI ImageGen",
     "purpose": "Earlier landscape illustration",

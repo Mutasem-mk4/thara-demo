@@ -1,0 +1,10 @@
+{
+  "checked_at": "2026-11-15T19:10:57.243Z",
+  "url": "http://127.0.0.1:4273/",
+  "checks": "Arabic mobile and English desktop; two options and three options including weather-only; day, volume and date effects; unknown and zero volume; restore; family; audit; PDF; changed-point NASA failure removes old results; saved example",
+  "initialRatios": [
+    "27%",
+    "22%"
+  ],
+  "errors": []
+}

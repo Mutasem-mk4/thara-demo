@@ -1,6 +1,10 @@
 # THARA · Team Thara
 
-Public static build of the crop and water-turn exploration prototype. This repository publishes browser assets and authentic saved NASA POWER data. The editable project source is delivered separately to the team.
+Public static build of the crop and water-turn exploration prototype. This repository publishes browser assets, authentic saved NASA POWER data and editable source in [source/](source/).
+
+Demo: https://mutasem-mk4.github.io/thara-demo/ · [English](https://mutasem-mk4.github.io/thara-demo/?lang=en) · [Slides and review materials](https://mutasem-mk4.github.io/thara-demo/materials/).
+
+To run from the source directory: `npm ci`, then `npm run dev`. Run `npm test` and `npm run build` for the recorded checks. Seven-slide English PPTX/PDF are under materials/. The older deck retained in source/delivery describes a superseded version.
 
 NASA POWER Daily: T2M, T2M_MAX, T2M_MIN, PRECTOTCORR; AG; LST; 2015–2024. Saved raw response and provenance are under `data/`. FAO-56 Hargreaves and generic Kc/stage profiles produce exploratory ETc estimates. The ratio compares entered water turns with modeled use; it is not an irrigation prescription or validated crop recommendation.
 
