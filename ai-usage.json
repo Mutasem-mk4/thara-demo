@@ -1,0 +1,29 @@
+{
+  "project": "THARA",
+  "team": "Thara",
+  "uses": [
+    "approved product rebuild plan",
+    "initial Claude implementation",
+    "Codex source verification and implementation integration",
+    "FAO-56 model and tests",
+    "Arabic and English copy",
+    "browser and PDF verification",
+    "documentation and presentation production"
+  ],
+  "nasa_source_values_ai_generated": false,
+  "synthetic_test_data": "Limited to test fixtures, distinct from NASA records",
+  "generated_image_video_or_audio_in_current_app_and_deck": false,
+  "historical_generated_media": {
+    "tool": "OpenAI ImageGen",
+    "purpose": "Earlier landscape illustration",
+    "status": "Labelled in the earlier UI, archived outside the current app and deck"
+  },
+  "prior_ideation_history": "Team review required for complete historical disclosure",
+  "application_implementation_start_check": "2026-11-14T13:42:31+03:00",
+  "assistants": [
+    "Anthropic Claude (version not independently verified)",
+    "OpenAI Codex"
+  ],
+  "model_outputs": "Hargreaves and Kc estimates derived by AI-assisted software from authentic NASA inputs; exploratory and locally uncalibrated.",
+  "revision": "Vegetable crop and irrigation-turn scenarios, 15 November 2026"
+}

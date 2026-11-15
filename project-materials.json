@@ -1,0 +1,111 @@
+{
+  "project": "THARA · Team Thara",
+  "updated": "2026-11-15",
+  "nasa_power": {
+    "service": "NASA Langley Research Center POWER Daily Point API, AG community",
+    "documentation": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+    "attribution": "https://power.larc.nasa.gov/docs/referencing/",
+    "license_registry": "https://registry.opendata.aws/nasa-power/",
+    "reference_point_latitude_longitude": [
+      32.16,
+      35.62
+    ],
+    "saved_api_version": "v2.10.3",
+    "saved_sources": [
+      "MERRA2",
+      "POWER"
+    ],
+    "time_standard": "LST (local solar time)",
+    "variables": {
+      "T2M": "Daily mean air temperature at 2 m, °C",
+      "T2M_MAX": "Daily maximum air temperature at 2 m, °C",
+      "T2M_MIN": "Daily minimum air temperature at 2 m, °C",
+      "PRECTOTCORR": "Daily corrected precipitation, mm/day (summed over one-day intervals as mm)"
+    },
+    "snapshots": [
+      {
+        "coverage": "2015-01-01 to 2024-12-31",
+        "raw": "data/power-2015-2024-raw.json",
+        "provenance": "data/power-2015-2024-provenance.json",
+        "expected_days": 3653
+      },
+      {
+        "coverage": "2024-01-01 to 2024-12-31",
+        "raw": "data/power-2024-raw.json",
+        "provenance": "data/power-2024-provenance.json"
+      },
+      {
+        "coverage": "2025-01-01 to 2025-12-31",
+        "raw": "data/power-2025-raw.json",
+        "provenance": "data/power-2025-provenance.json"
+      }
+    ],
+    "limits": "Historical gridded weather. The request point identifies the requested location, not a field sensor. The data do not measure field soil moisture or irrigation supply and do not forecast future seasons."
+  },
+  "sources": {
+    "LENSES D2.2, section 3.1.1 Deir Alla": "https://www.lenses-prima.eu/wp-content/uploads/2024/02/D2_2_Activity_of_the_LAAs-D2_2_Activity_of_the_LENSES_Learning_and_Action_Al.pdf",
+    "NARC/LENSES, forage trial": "https://www.lenses-prima.eu/wp-content/uploads/2022/11/Jordan-New-forage-crops-for-fodder-production-in-a-changing-climate_NARC.pdf",
+    "Ghanayem et al. 2025, vegetable study": "https://journals.nasspublishing.com/index.php/rwae/article/download/104701",
+    "SARE, cover crops and potential nitrogen contribution": "https://www.sare.org/publications/managing-cover-crops-profitably/building-soil-fertility/",
+    "FAO, Sesbania species and potential soil effects": "https://www.fao.org/4/x5491e/x5491e0a.htm",
+    "Jordan Department of Statistics, Deir Alla vegetables, 2019": "https://dosweb.dos.gov.jo/DataBank/Agri/Agr_2019.pdf#page=87",
+    "FAO, crop stages sensitive to water shortage": "https://www.fao.org/4/t7202e/t7202e05.htm",
+    "University of Minnesota Extension, vegetables": "https://extension.umn.edu/agriculture/specialty-crops/vegetable-farming/irrigation-strategies-for-vegetables",
+    "Utah State University Extension, cucurbit irrigation": "https://extension.usu.edu/vegetableguide/cucurbits/irrigation",
+    "University of Georgia Extension, okra": "https://site.extension.uga.edu/colquittag/files/2023/10/Okra.pdf",
+    "University of Minnesota Extension, barley growth stages": "https://extension.umn.edu/agriculture/crop-production/small-grains/spring-barley-growth-and-development-guide",
+    "OpenStreetMap contributors, basemap and attribution": "https://www.openstreetmap.org/copyright",
+    "NASA Space Apps project submission guide": "https://www.spaceappschallenge.org/resources/project-submission-guide/",
+    "NASA Space Apps judging guide": "https://www.spaceappschallenge.org/resources/judging-awards-guide/"
+  },
+  "tools": {
+    "application": [
+      "React",
+      "React DOM",
+      "TypeScript",
+      "Vite",
+      "Leaflet",
+      "Noto Sans Arabic via Fontsource",
+      "HTML, CSS, Fetch, Geolocation and browser print APIs",
+      "IBM Plex Sans Arabic via Fontsource 5.2.6, OFL-1.1"
+    ],
+    "development_and_verification": [
+      "Anthropic Claude for the user-supplied plan and initial rebuild code (model version unverified)",
+      "OpenAI Codex",
+      "web search and browser tools",
+      "PowerShell",
+      "Node.js",
+      "npm",
+      "Git",
+      "Vitest",
+      "Playwright",
+      "Chromium / Microsoft Edge",
+      "Python",
+      "Poppler"
+    ],
+    "delivery": [
+      "OpenAI Artifact Tool for editable slides",
+      "ChatGPT Sites for static hosting",
+      "OpenAI ImageGen for an archived illustration from an earlier build"
+    ]
+  },
+  "materials": {
+    "ai_disclosure": "ai-usage.json",
+    "licenses_and_attribution": "third-party-notices.txt",
+    "demo": "Rebuild English presentation with genuine captured application screenshots, source notes and AI disclosure. Earlier delivery files retain historical scope.",
+    "current_app": "No decorative photographic, video or audio assets. Interactive OpenStreetMap views and app-generated charts appear when requested."
+  },
+  "model": {
+    "method": "FAO-56 Eq. 9, 21–25 and 52 (Hargreaves) and ETc = Kc × ETo",
+    "crop_profiles": "Seven generic FAO-56 Table 11/12 profiles with disclosed stage/parameter choices. Okra and other crops show weather only.",
+    "uncertainty": "Median and min–max of complete shared historical seasons. Explicit Kc ±10% sensitivity. No field calibration.",
+    "water": "Gross mm = m³ per turn / area in metric dunums. An explicit efficiency scenario can adjust it. Effective rain and soil-water storage are excluded.",
+    "references": {
+      "FAO56 temperature and Hargreaves": "https://www.fao.org/4/x0490e/x0490e07.htm",
+      "FAO56 crop coefficients and stage lengths": "https://www.fao.org/4/x0490e/x0490e0b.htm",
+      "FAO indicative application efficiency": "https://www.fao.org/4/t7202e/t7202e08.htm",
+      "FAO56 soil-water balance, extension context": "https://www.fao.org/4/x0490e/x0490e0e.htm",
+      "Botanical families": "https://extension.umn.edu/garden-and-home/yard-and-garden/gardening-in-minnesota/living-soil-healthy-garden"
+    }
+  }
+}
