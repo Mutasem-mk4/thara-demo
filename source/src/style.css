@@ -273,8 +273,10 @@ thead th { background: var(--soft); color: var(--muted); font-weight: 400; }
   .priority-review { background: transparent; border: 1px solid var(--line); padding: .7rem; }
   .priority-review select { appearance: none; border: 0; padding: 0; min-height: 0; background: transparent; }
   .research-case > summary { font-size: 15pt; font-weight: 600; }
-  .research-strategies { grid-template-columns: 1fr; }
-  .strategy-card { break-inside: avoid; }
-  .research-case { break-before: page; }
+  .research-strategies { display: block; margin-block-end: 0; }
+  .strategy-card { break-inside: avoid; margin-block-end: .8rem; }
+  .research-case { break-before: page; margin-block-end: 0; padding-block-end: 0; }
+  .research-body { padding-block-end: 0; }
+  .research-body > p:last-child { margin-block-end: 0; }
   .research-case:not([open]) { display: none; }
 }
