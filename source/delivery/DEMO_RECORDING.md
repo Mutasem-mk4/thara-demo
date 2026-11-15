@@ -9,9 +9,12 @@ Use the verified rebuild URL in ../docs/DEPLOYMENT.md. Choose English for judges
 5. Open **How was this calculated?** then **Trace one interval to NASA days**. Show Tmax/Tmin, Ra, ETo, Kc and ETc. Open the original request/saved data.
 6. **Save my plan as PDF**. Explain that local calibration, effective rain and soil storage remain missing. State the next grower-comprehension and measurement test.
 
+For the pre-submission revision, also switch **Your comparison priority** from Water to Soil and show that explanations change while percentages remain fixed. Open the local-evidence section below the crop results: the three strategies are an unknown baseline and the two published LENSES sequences. Switch **Forage case review priority** to Feed continuity. Clearly call it a separate research case with unavailable water demand. Leave it open to include it in PDF; close it for the ordinary vegetable plan. Optional constraints reach the review/audit and do not secretly change crop coefficients.
+
 Avoid GPS/map dependence in a short demo. The exact-point saved example works if NASA fails. An entirely offline first visit still needs the app assets; no service worker is implemented.
 
 Optional short narration:
 “THARA compares crop and planting choices with your irrigation turns. This fictional Deir Alla field uses ten years of real NASA POWER weather and published FAO equations. Add a turn or shift a date and the estimate changes. Each result has a source trail. These are exploratory estimates; local field validation is our next step.”
 
 Record the actual app. No people, generated voices or NASA logo are needed. Deck screenshots are marked as AI-assisted prototype UI.
+

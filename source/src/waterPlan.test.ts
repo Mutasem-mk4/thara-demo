@@ -20,6 +20,8 @@ test('distinguishes unknown days from zero matches and counts an inclusive leap-
 });
 
 test('converts flow only with complete valid inputs, and preserves a genuine zero', () => {
+  expect(volumePerTurn({ mode: 'not_entered' })).toBeNull();
+  expect(volumePerTurn({ mode: 'unknown' })).toBeNull();
   expect(volumePerTurn({ mode: 'flow', litresPerSecond: '', hours: '2' })).toBeNull();
   expect(volumePerTurn({ mode: 'flow', litresPerSecond: '2', hours: '25' })).toBeNull();
   expect(volumePerTurn({ mode: 'volume', cubicMetres: '0' })).toBe(0);

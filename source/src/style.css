@@ -184,6 +184,33 @@ thead th { background: var(--soft); color: var(--muted); font-weight: 400; }
 .app-footer details { border: 0; padding: 0; max-width: 44rem; }
 .app-footer summary { padding-block: 0; }
 .app-footer p + p { margin-block-start: .7rem; }
+.priority-review { margin-block: 1.5rem; padding: 1.2rem 1.4rem; background: var(--soft); border-radius: 10px; }
+.priority-review > .field { max-width: 32rem; }
+.review-sections section { margin-block-start: 1rem; }
+.review-sections section:not(:first-child) { display: none; }
+.review-sections p, .review-sections li { font-size: .9rem; }
+.review-sections ul { padding-inline-start: 1.2rem; margin-block-start: .5rem; }
+.measurement-summary { margin-block-start: 1rem; }
+.context-editor { margin-block: 1.2rem 1.8rem; }
+.context-editor > p { margin-block: .8rem 1rem; }
+.context-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.4rem; margin-block: 1rem; }
+.context-fields fieldset { border-block-start: 1px solid var(--line); padding-block-start: .8rem; }
+.context-fields legend, .salinity-editor legend { font-size: 1rem; }
+.context-fields textarea { resize: vertical; }
+.salinity-editor { border-block-start: 1px solid var(--line); margin-block: 1.5rem; padding-block-start: 1rem; }
+.salinity-editor > p { margin-block: .7rem; }
+.measurement-status { font-size: .85rem; color: var(--muted); }
+.research-case { margin-block: 2rem; }
+.research-body { padding-block: 1rem; }
+.research-body > p { margin-block: .8rem; max-width: 90ch; }
+.research-body > .field { max-width: 30rem; }
+.research-strategies { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.2rem; margin-block: 1.2rem; }
+.strategy-card { border: 1px solid var(--line); border-radius: 9px; padding: 1rem; min-width: 0; }
+.strategy-status { font-size: .8rem; color: var(--muted); margin-block-end: .5rem; }
+.strategy-card h3 { margin-block-end: .7rem; }
+.strategy-card p, .strategy-card a { font-size: .87rem; }
+.strategy-topic { border-block-start: 1px solid var(--line); padding-block-start: .7rem; margin-block: .7rem; }
+.strategy-topic h4 { font-size: .95rem; }
 .plan-inputs { display: flex; flex-wrap: wrap; gap: 1rem 2rem; margin-block: 0 1.8rem; padding-block: 1rem; border-block: 1px solid var(--line); }
 .plan-inputs dt { color: var(--muted); font-size: .78rem; }
 .plan-inputs dd { margin: .2rem 0 0; font-weight: 600; font-size: .95rem; }
@@ -203,6 +230,8 @@ thead th { background: var(--soft); color: var(--muted); font-weight: 400; }
   .journey-steps li > span { width: 22px; height: 22px; font-size: .67rem; }
   h1 { font-size: 1.95rem; }
   .input-pair { grid-template-columns: 1fr; gap: .9rem; }
+  .context-fields, .research-strategies { grid-template-columns: 1fr; }
+  .priority-review { padding: 1rem; }
   .step-title { margin-block-end: 1.3rem; }
   .day-buttons { gap: .4rem; }
   .day-buttons label { padding-inline: .6rem; }
@@ -240,4 +269,12 @@ thead th { background: var(--soft); color: var(--muted); font-weight: 400; }
   .table-scroll, .comparison-scroll { overflow: visible; }
   .options-comparison button { border: 0; background: transparent; padding: 0; min-height: 0; }
   .print-footnote { margin-block: 1rem; }
+  .review-sections section { display: block !important; break-inside: avoid; }
+  .priority-review { background: transparent; border: 1px solid var(--line); padding: .7rem; }
+  .priority-review select { appearance: none; border: 0; padding: 0; min-height: 0; background: transparent; }
+  .research-case > summary { font-size: 15pt; font-weight: 600; }
+  .research-strategies { grid-template-columns: 1fr; }
+  .strategy-card { break-inside: avoid; }
+  .research-case { break-before: page; }
+  .research-case:not([open]) { display: none; }
 }

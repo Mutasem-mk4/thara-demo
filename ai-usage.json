@@ -11,7 +11,7 @@
     "documentation and presentation production"
   ],
   "nasa_source_values_ai_generated": false,
-  "synthetic_test_data": "Limited to test fixtures, distinct from NASA records",
+  "synthetic_test_data": "Numeric fixtures and explicitly labelled UI TEST constraint/measurement inputs in browser checks; distinct from authentic NASA records and not field measurements.",
   "generated_photograph_video_or_audio_in_current_app_and_deck": false,
   "code_authored_visuals": "The interface, THARA vector mark and data-chart code were AI-assisted. A visible app footer and screenshot captions disclose this. NASA logos are absent.",
   "historical_generated_media": {
@@ -26,5 +26,5 @@
     "OpenAI Codex"
   ],
   "model_outputs": "Hargreaves and Kc estimates derived by AI-assisted software from authentic NASA inputs; exploratory and locally uncalibrated.",
-  "revision": "Vegetable crop and irrigation-turn scenarios, 15 November 2026"
+  "revision": "Pre-submission completion: crop/water scenarios, optional constraints, explanation priorities and separate documented forage research comparison, 15 November 2026"
 }

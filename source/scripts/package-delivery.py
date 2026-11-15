@@ -7,15 +7,16 @@ from zipfile import ZIP_DEFLATED, ZipFile
 root = Path(__file__).resolve().parent.parent
 output = root.parent / 'THARA_REBUILD_DELIVERY_2026-11-15.zip'
 root_files = ['README.md', 'PRODUCT.md', 'DESIGN.md', 'LICENSE', 'package.json', 'package-lock.json',
-              'tsconfig.json', 'vite.config.ts', 'index.html', '.env.example', '.gitignore', 'ai-usage.json']
+              'tsconfig.json', 'vite.config.ts', 'vitest.config.ts', 'index.html', '.env.example', '.gitignore', 'ai-usage.json']
 files = [root / name for name in root_files]
 for folder in ('src', 'public', 'scripts', 'dist'):
     files.extend(file for file in (root / folder).rglob('*') if file.is_file())
 files.extend(file for file in (root / 'docs').iterdir() if file.is_file())
 files.extend(file for file in (root / 'delivery').iterdir()
-             if file.is_file() and (file.suffix == '.md' or file.name.startswith('THARA_Rebuild_EN.')))
-files.extend(file for file in (root / 'docs/evidence/rebuild').rglob('*') if file.is_file())
-files.extend(root / '.build-slides' / name for name in ('build-rebuild-deck.mjs', 'export-rebuild-pdf.py'))
+             if file.is_file() and (file.suffix == '.md' or file.name.startswith('THARA_Final_EN.')))
+for phase in ('rebuild', 'closeout'):
+    files.extend(file for file in (root / 'docs/evidence' / phase).rglob('*') if file.is_file())
+files.extend(root / '.build-slides' / name for name in ('build-final-deck.mjs', 'export-final-pdf.py'))
 files = sorted(set(file for file in files if file.is_file()))
 manifest = {'project': 'THARA', 'revision': '2026-11-15 vegetable crop/water-turn rebuild',
             'public_demo': 'https://mutasem-mk4.github.io/thara-demo/',

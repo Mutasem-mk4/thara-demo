@@ -1,5 +1,18 @@
 # Verification record
 
+## Pre-submission completion — 15 November 2026
+
+Current closeout evidence is under `evidence/closeout/`; the earlier rebuild record below describes the preceding version.
+
+- 50 tests passed across seven source test files. Vitest is explicitly scoped to `src/**/*.test.ts`, so archived code snapshots are not accidentally collected. The added tests cover user-reported salinity documentation, zero versus missing readings and priority explanation order. Missing or unknown irrigation volume still returns no depth, not zero.
+- Production TypeScript/Vite build passed. The scenario math is unchanged by the new context. Arabic mobile browser checks verified priority switching with unchanged percentages, recorded/unknown constraints, zero-valued user-reported ECe, incomplete and completed documentation, three stable research strategy IDs, feed-priority ordering, and audit exports containing the same states.
+- English desktop checks exercised three crop options including weather-only okra. The English printable system text contains no Arabic. A closed research case stays out of the ordinary plan; an open case reaches a separate research PDF. Source/measurement text entered by a user is preserved in its original language.
+- Generated Arabic/English print artifacts and real UI screenshots are in the closeout evidence directory. Browser-entered measurement/market examples carry explicit `UI TEST` labels and are not real field measurements. NASA values remain authentic, separately retained source evidence.
+- The current seven-slide deck is `delivery/THARA_Final_EN.pptx` with a matching image-rendered PDF. Package/layout checks and Artifact Tool import passed, and all seven slide renders were visually inspected. Native PowerPoint execution remains untested.
+- Field validation, farmer interviews, model calibration, physical-phone GPS, full screen-reader coverage and an entirely offline first visit remain unverified or unimplemented. A NASA outage is handled through the exact saved case; it is not a service-worker offline guarantee.
+
+Public deployment of this completion is recorded separately in `DEPLOYMENT.md` after the release checks. No official competition submission has been made.
+
 ## Water-model rebuild — 15 November 2026, 21:54 Amman
 
 This section describes the current interface. Earlier sections below are historical records for superseded versions.

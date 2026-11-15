@@ -14,6 +14,8 @@ THARA helps an Arabic-speaking vegetable grower compare crop and planting-date s
 
 ## Detailed description
 
+The final revision also provides a separate, clearly labelled LENSES forage research comparison: unknown current practice, sorghum then vetch, and sesbania then barley. Both published alternatives are local; whole-sequence water demand and exact dates remain unavailable. This is not a recommendation to convert vegetable land to forage, and vegetable demand estimates are not transferred to it. Priority moves water, soil, feed or risk explanations first without ranking strategies. Optional field constraints and distinct not-entered/unknown/reported measurement states reach the review, PDF and audit; ECe and ECw stay separate and unverified.
+
 A vegetable grower can know the days water arrives yet still need to compare how the next crop's estimated use changes through the season. THARA combines field location, metric-dunum area, previous crop, water weekdays and optional turn volume with up to three crop/date scenarios. The interface works in Arabic and English without an account. A fictional Deir Alla example opens from a real saved NASA record.
 
 NASA POWER Daily Point supplies T2M, T2M_MAX, T2M_MIN and PRECTOTCORR for 2015–2024. Tmax/Tmin, latitude and day of year drive Hargreaves reference evapotranspiration following FAO-56 equations 9, 21–25 and 52. Selected generic crop coefficients and stages from Tables 11/12 produce standard-condition ETc. Seven vegetable profiles have a model; okra and unspecified crops display weather only because a complete adopted profile has not been verified.
@@ -45,17 +47,19 @@ The user supplied the project and research handoff. Claude assisted the rebuild 
 
 ## Verification and next step
 
-48 automated tests and a production build passed. Browser checks exercised Arabic mobile and English desktop, days/date/volume changes, zero inputs, audit/PDF export and simulated NASA failure. These are software checks, not field validation. No farmer interview, measured farm, partnership, calibrated irrigation recommendation or proven impact is claimed.
+50 automated tests and a production build passed. Browser checks exercised Arabic mobile and English desktop, days/date/volume changes, zero inputs, audit/PDF export and simulated NASA failure. These are software checks, not field validation. No farmer interview, measured farm, partnership, calibrated irrigation recommendation or proven impact is claimed.
 
 Next: observe a grower using the comparison, check whether they can explain the percentage, and compare modeled ETc against locally validated weather, irrigation and soil measurements.
 
 ## Submission assets
 
 - Final project: https://mutasem-mk4.github.io/thara-demo/?lang=en
-- Demo presentation: https://mutasem-mk4.github.io/thara-demo/materials/THARA_Rebuild_EN.pdf
-- Editable deck: https://mutasem-mk4.github.io/thara-demo/materials/THARA_Rebuild_EN.pptx
+- Demo presentation: https://mutasem-mk4.github.io/thara-demo/materials/THARA_Final_EN.pdf
+- Editable deck: https://mutasem-mk4.github.io/thara-demo/materials/THARA_Final_EN.pptx
 - Actual project image: https://mutasem-mk4.github.io/thara-demo/materials/project-image.png
 - Source: https://github.com/Mutasem-mk4/thara-demo/tree/main/source
 - Review materials: https://mutasem-mk4.github.io/thara-demo/materials/
 
-Use the seven-slide **THARA_Rebuild_EN** PPTX/PDF with actual UI screenshots, names and sources. The older **THARA_Demo_Team_Thara_EN** deck describes a superseded scope. No final video has been produced. Check live rules before choosing a video length. Do not link localhost or a private repo as a public demo.
+Use the seven-slide **THARA_Final_EN** PPTX/PDF with actual UI screenshots, names and sources. The older **THARA_Demo_Team_Thara_EN** deck describes a superseded scope. No final video has been produced. Check live rules before choosing a video length. Do not link localhost or a private repo as a public demo.
+
+

@@ -25,6 +25,10 @@ The Vite output is `dist/`. No API key, login, database or environment secret is
 
 ## The working journey
 
+The pre-submission completion adds optional soil/drainage, current-sequence, market, finance, labour and equipment notes. Not-entered, unknown and reported states remain distinct. Separate ECe/ECw documentation records never adjust ETc or imply suitability. Priority changes explanation/question order, with no numeric crop ranking. Notes and measurement documentation reach print and the audit.
+
+A separate expandable LENSES forage comparison contains an unknown baseline and the two locally published sequences. It has no whole-sequence water estimate and no assumed exact planting dates. Its water/soil/feed/risk priority reorders explanations only. It prints only when left open. See `docs/CLOSEOUT_REVIEW_EN.md` for the exact scope and limits.
+
 Choose **Start with my field** to select an area reference point, map point, device location or manual coordinates. Add the area in metric dunums, if known, and the previous crop. Record recurring water weekdays and optional volume per turn or flow and duration. Choose up to three crop/date pairs and open the comparison.
 
 **See the Deir Alla example** loads a fictional four-dunum field, previous tomato, Sunday/Thursday turns of 30 m³ each, and zucchini/tomato scenarios beginning 1 March 2027. The actual NASA record is saved at 32.16 N, 35.62 E. The example dates and field inputs are demonstration assumptions.

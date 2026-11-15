@@ -1,5 +1,9 @@
 # Honest judge answers
 
+**Are there three rotation strategies now?** A separate qualitative forage case shows unknown current practice, sorghum → vetch and sesbania → barley from LENSES. It does not infer a local baseline, adopt vegetable coefficients for forage, or calculate whole-cycle water demand. The main vegetable comparison remains crop/date scenarios after a previous crop.
+
+**What do priorities and soil/salinity inputs change?** Priorities reorder explanations/questions. Optional notes and user-reported ECe/ECw reach review, print and audit. Documentation completeness is not verification. These inputs do not change ETc or establish crop suitability.
+
 **What does NASA change?** Tmax/Tmin drive daily Hargreaves ETo. A date change selects different historical days; the crop selects Kc/stages. NASA is a numerical input.
 
 **Is it a forecast?** No. Matching season starts in 2015–2024 produce a median and range across complete shared years. Ten seasons are not a 30-year normal.
@@ -31,3 +35,4 @@
 **What AI was used?** Claude assisted the plan/initial code; Codex assisted review, implementation, tests, copy and artifacts. Raw NASA values were retrieved; modeled outputs are estimates. Interface, metadata and submission copy disclose this.
 
 **What remains?** Grower comprehension tests, local model/field measurements, competition eligibility and registration checks. Official submission is the team's action.
+

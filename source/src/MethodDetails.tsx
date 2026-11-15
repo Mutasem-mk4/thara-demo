@@ -7,12 +7,14 @@ import type { ReferenceDay } from './eto';
 import type { Language } from './evidence';
 import { Ltr, type Translate } from './fields';
 import { number, planDate } from './plannerFormat';
+import type { PlanningContext } from './planningContext';
 
-export function downloadPlan(bundle: ClimateBundle, results: SeasonAnalysis[], water: WaterInput, previous: string) {
+export function downloadPlan(bundle: ClimateBundle, results: SeasonAnalysis[], water: WaterInput, previous: string, context: PlanningContext) {
   const document = {
     project: 'THARA', created_at: new Date().toISOString(),
     disclosure: 'Codex and Claude assisted software and model implementation. NASA source values were retrieved. Derived FAO estimates are exploratory and require local validation.',
-    water, previousCrop: previous, results, nasa: bundle.evidence,
+    water, previousCrop: previous, planningContext: context, results, nasa: bundle.evidence,
+    localResearchCase: { scope: 'Separate fictional forage case; no vegetable-field inputs or water estimates are transferred', priority: context.researchPriority, strategies: ['baseline_unknown', 'sorghum_vetch', 'sesbania_barley'], localSource: 'https://www.lenses-prima.eu/wp-content/uploads/2024/02/D2_2_Activity_of_the_LAAs-D2_2_Activity_of_the_LENSES_Learning_and_Action_Al.pdf', wholeSequenceWaterDemand: null, baseline: null },
     methodology: { radiation: 'FAO-56 Eq 21–25, MJ/m²/day', eto: 'Eq 52 Hargreaves, Tmean = (T2M_MAX + T2M_MIN)/2 per Eq 9, radiation × 0.408',
       cropUse: 'ETc = Kc × ETo, FAO-56 Tables 11/12, no local adjustment',
       intervals: 'From turn day inclusive to next turn day exclusive. Initial/final incomplete turn intervals excluded.',

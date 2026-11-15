@@ -15,18 +15,18 @@ export const weekdays = [
 ] as const;
 export type FieldInput = { point: LocationChoice | null; previous: string };
 
-export function DayChoices({ selected, update, language, t }: { selected: number[]; update: (days: number[]) => void; language: Language; t: Translate }) {
+export function DayChoices({ selected, update, language, t }: { selected: number[]; update: (days: number[], state?: WaterInput['daysState']) => void; language: Language; t: Translate }) {
   return <fieldset className="day-choices"><legend>{t('بأي أيام بتتوفر الميّ؟', 'Which days is water available?')}</legend>
     <div className="day-buttons">{weekdays.map((day, index) => <label key={day.en}>
       <input type="checkbox" checked={selected.includes(index)} onChange={event => update(event.currentTarget.checked
         ? [...selected, index].sort() : selected.filter(chosen => chosen !== index))} />{day[language]}
     </label>)}</div>
-    <button type="button" className="text-button" onClick={() => update([])}>{t('ما بعرف الأيام', 'I don’t know the days')}</button>
+    <button type="button" className="text-button" onClick={() => update([], 'unknown')}>{t('ما بعرف الأيام', 'I don’t know the days')}</button>
   </fieldset>;
 }
 
-export function FieldSetup({ field, area, update, updateArea, next, t, language }: {
-  field: FieldInput; area: string; update: Dispatch<SetStateAction<FieldInput>>; updateArea: (area: string) => void;
+export function FieldSetup({ field, area, areaState, update, updateArea, next, t, language }: {
+  field: FieldInput; area: string; areaState?: WaterInput['areaState']; update: Dispatch<SetStateAction<FieldInput>>; updateArea: (area: string, state?: WaterInput['areaState']) => void;
   next: () => void; t: Translate; language: Language;
 }) {
   const [mapOpen, setMapOpen] = useState(false);
@@ -74,13 +74,16 @@ export function FieldSetup({ field, area, update, updateArea, next, t, language 
     <form onSubmit={event => { event.preventDefault(); if (field.point) { geo.cancel(); next(); } }}>
       <div className="input-pair">
         <Field label={t('مساحة القطعة بالدونم، إذا بتعرفها', 'Field area in dunums, if known')} hint={t('الدونم المستخدم هون 1000 متر مربع.', 'Here one dunum is 1,000 m².')}>
-          <input type="number" min="0.01" step="any" inputMode="decimal" dir="ltr" value={area} onChange={event => updateArea(event.currentTarget.value)} placeholder={t('ما بعرف', 'Unknown')} />
+          <input type="number" min="0.01" step="any" inputMode="decimal" dir="ltr" value={area} onChange={event => updateArea(event.currentTarget.value)} placeholder={t('لم أُدخل', 'Not entered')} />
         </Field>
         <Field label={t('شو زرعت آخر مرة؟', 'What did you grow last?')}><select value={field.previous} onChange={event => update({ ...field, previous: event.currentTarget.value })}>
-          <option value="">{t('ما بعرف / لم أحدد', 'Unknown / not recorded')}</option>
+          <option value="">{t('لم أُدخل', 'Not entered')}</option>
+          <option value="unknown">{t('لا أعرف', 'I do not know')}</option>
           {cropProfiles.filter(profile => profile.id !== 'other').map(profile => <option key={profile.id} value={profile.id}>{profile.name[language]}</option>)}
         </select></Field>
       </div>
+      <button type="button" className="text-button" onClick={() => updateArea('', 'unknown')}>{t('ما بعرف المساحة', 'I do not know the area')}</button>
+      {areaState === 'unknown' && <p className="model-limit" role="status">{t('سجّلت أن المساحة غير معروفة؛ لن نحسب ماء الدور بالمليمتر.', 'Area is recorded as unknown; turn depth in millimetres will not be calculated.')}</p>}
       <button className="primary next-step" disabled={!field.point}>{t('التالي، دور الميّ', 'Next, your water turns')} <span aria-hidden="true">←</span></button>
     </form>
   </section>;
@@ -90,13 +93,14 @@ export function WaterEditor({ water, update, t, language, compact = false }: {
   water: WaterInput; update: (water: WaterInput) => void; t: Translate; language: Language; compact?: boolean;
 }) {
   return <div className="water-editor">
-    <DayChoices selected={water.weekdays} update={weekdays => update({ ...water, weekdays })} t={t} language={language} />
+    <DayChoices selected={water.weekdays} update={(weekdays, daysState) => update({ ...water, weekdays, daysState: daysState ?? (weekdays.length ? 'reported' : 'not_entered') })} t={t} language={language} />
+    {!water.weekdays.length && <p className="model-limit">{water.daysState === 'unknown' ? t('أيام الماء غير معروفة حسب اختيارك.', 'Water days are explicitly unknown.') : t('لم تحدد أيام الماء بعد.', 'Water days have not been entered.')}</p>}
     <Field label={t('قديش ميّ بتيجيك بكل دور؟', 'How much water arrives per turn?')}><select value={water.supply.mode} onChange={event => {
       const mode = event.currentTarget.value;
       const supply = mode === 'volume' ? { mode: 'volume' as const, cubicMetres: '' } : mode === 'flow'
-        ? { mode: 'flow' as const, litresPerSecond: '', hours: '' } : { mode: 'unknown' as const };
+        ? { mode: 'flow' as const, litresPerSecond: '', hours: '' } : mode === 'not_entered' ? { mode: 'not_entered' as const } : { mode: 'unknown' as const };
       update({ ...water, supply });
-    }}><option value="unknown">{t('ما بعرف الكمية', 'I don’t know the volume')}</option><option value="volume">{t('بعرفها بالمتر المكعب', 'I know the cubic metres')}</option><option value="flow">{t('بعرف التصريف ومدة الدور', 'I know flow and turn duration')}</option></select></Field>
+    }}><option value="not_entered">{t('لم أُدخل الكمية', 'Volume not entered')}</option><option value="unknown">{t('ما بعرف الكمية', 'I don’t know the volume')}</option><option value="volume">{t('بعرفها بالمتر المكعب', 'I know the cubic metres')}</option><option value="flow">{t('بعرف التصريف ومدة الدور', 'I know flow and turn duration')}</option></select></Field>
     {water.supply.mode === 'volume' && <Field label={t('متر مكعب لكل دور، للقطعة كلها', 'Cubic metres per turn, for the whole field')}>
       <input type="number" min="0" step="any" inputMode="decimal" dir="ltr" value={water.supply.cubicMetres} onChange={event => update({ ...water, supply: { mode: 'volume', cubicMetres: event.currentTarget.value } })} />
     </Field>}

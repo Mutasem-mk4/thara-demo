@@ -11,11 +11,15 @@ import { WaterEditor, type FieldInput } from './PlannerInput';
 import { number, planDate } from './plannerFormat';
 import { volumePerTurn } from './waterPlan';
 import { cropProfile } from './cropProfiles';
+import { ContextEditor, PriorityReview } from './FieldContextPanel';
+import type { PlanningContext } from './planningContext';
+import { LocalResearchComparison } from './LocalResearchComparison';
 
-export function Result({ results, bundle, weather, water, updateWater, field, updateOptions, edit, example, t, language }: {
+export function Result({ results, bundle, weather, water, updateWater, field, updateOptions, edit, example, context, updateContext, t, language }: {
   results: SeasonAnalysis[]; bundle: ClimateBundle; weather: Map<string, ReferenceDay>; water: WaterInput;
   updateWater: (water: WaterInput) => void; field: FieldInput; updateOptions: (options: SeasonOption[]) => void;
   edit: () => void; example: boolean; t: Translate; language: Language;
+  context: PlanningContext; updateContext: (context: PlanningContext) => void;
 }) {
   const [selectedId, setSelected] = useState(results[0].option.id);
   const original = useRef({ water, options: results.map(result => result.option) });
@@ -30,9 +34,9 @@ export function Result({ results, bundle, weather, water, updateWater, field, up
         <span className="simulation-live">{t('الحساب يتحدّث مع كل تعديل', 'Updates with each change')}</span></div>
       <details className="disclosure"><summary>{t('غيّر الأيام أو الكمية', 'Change turn days or volume')}</summary>
         <WaterEditor water={water} update={updateWater} t={t} language={language} compact />
-        <label className="field"><span>{t('مساحة القطعة بالدونم', 'Field area in dunums')}</span><input type="number" min="0.01" step="any" dir="ltr" value={water.area} onChange={event => updateWater({ ...water, area: event.currentTarget.value })} /></label>
+        <label className="field"><span>{t('مساحة القطعة بالدونم', 'Field area in dunums')}</span><input type="number" min="0.01" step="any" dir="ltr" value={water.area} onChange={event => updateWater({ ...water, area: event.currentTarget.value, areaState: event.currentTarget.value.trim() ? 'reported' : 'not_entered' })} /></label>
       </details>
-      <div className="inline-actions">{[0, 2, 4].filter(day => !water.weekdays.includes(day)).slice(0, 1).map(day => <button key={day} type="button" onClick={() => updateWater({ ...water, weekdays: [...water.weekdays, day].sort() })}>
+      <div className="inline-actions">{[0, 2, 4].filter(day => !water.weekdays.includes(day)).slice(0, 1).map(day => <button key={day} type="button" onClick={() => updateWater({ ...water, weekdays: [...water.weekdays, day].sort(), daysState: 'reported' })}>
         {t('جرّب إضافة', 'Try adding')} {language === 'ar' ? ['الأحد', '', 'الثلاثاء', '', 'الخميس'][day] : ['Sunday', '', 'Tuesday', '', 'Thursday'][day]}
       </button>)}<button type="button" onClick={() => updateOptions(results.map(result => result.option.id === selected.option.id
         ? { ...result.option, planting: addDays(result.option.planting, 14) } : result.option))}>{t('جرّب تأخير هذا الخيار أسبوعين', 'Try this option two weeks later')}</button></div>
@@ -51,10 +55,10 @@ export function Result({ results, bundle, weather, water, updateWater, field, up
       {bundle.fallback && <p>{t('تعذّر الجلب المباشر. هذه النسخة تغطي نفس النقطة والفترة.', 'Live retrieval failed. This copy covers the same point and historical period.')}</p>}
     </div>
     <dl className="plan-inputs">
-      <div><dt>{t('مساحة القطعة', 'Field area')}</dt><dd>{water.area.trim() && Number(water.area) > 0 ? <><Ltr>{number(Number(water.area))}</Ltr> {t('دونم', 'metric dunums')}</> : t('غير معروفة', 'Unknown')}</dd></div>
-      <div><dt>{t('أيام وصول الميّ', 'Water turn days')}</dt><dd>{water.weekdays.length ? water.weekdays.map(day => weekdays[day]).join(language === 'ar' ? '، ' : ', ') : t('غير معروفة', 'Unknown')}</dd></div>
-      <div><dt>{t('كمية الدور للقطعة كلها', 'Turn volume for the whole field')}</dt><dd>{volume === null ? t('غير معروفة', 'Unknown') : <Ltr>{number(volume)} m³</Ltr>}</dd></div>
-      <div><dt>{t('المحصول السابق', 'Previous crop')}</dt><dd>{previous?.name[language] ?? t('غير معروف', 'Unknown')}</dd></div>
+      <div><dt>{t('مساحة القطعة', 'Field area')}</dt><dd>{water.area.trim() && Number(water.area) > 0 ? <><Ltr>{number(Number(water.area))}</Ltr> {t('دونم', 'metric dunums')}</> : water.areaState === 'unknown' ? t('غير معروفة', 'Unknown') : t('لم تُدخل', 'Not entered')}</dd></div>
+      <div><dt>{t('أيام وصول الميّ', 'Water turn days')}</dt><dd>{water.weekdays.length ? water.weekdays.map(day => weekdays[day]).join(language === 'ar' ? '، ' : ', ') : water.daysState === 'unknown' ? t('غير معروفة', 'Unknown') : t('لم تُدخل', 'Not entered')}</dd></div>
+      <div><dt>{t('كمية الدور للقطعة كلها', 'Turn volume for the whole field')}</dt><dd>{volume === null ? water.supply.mode === 'unknown' ? t('غير معروفة', 'Unknown') : water.supply.mode === 'not_entered' ? t('لم تُدخل', 'Not entered') : t('الإدخال غير مكتمل', 'Input incomplete') : <Ltr>{number(volume)} m³</Ltr>}</dd></div>
+      <div><dt>{t('المحصول السابق', 'Previous crop')}</dt><dd>{previous?.name[language] ?? (field.previous === 'unknown' ? t('غير معروف', 'Unknown') : t('لم يُدخل', 'Not entered'))}</dd></div>
     </dl>
     <div className="comparison-scroll"><table className="options-comparison"><caption>{t('قارن خياراتك كما أدخلتها', 'Compare your options as entered')}</caption>
       <thead><tr><th>{t('الخيار', 'Option')}</th><th>{t('الزراعة المخطّطة', 'Planned planting')}</th><th>{t('أعلى استهلاك بين دورين', 'Peak use between turns')}</th><th>{t('نسبة الدور للتقدير', 'Turn / estimate')}</th></tr></thead>
@@ -71,9 +75,12 @@ export function Result({ results, bundle, weather, water, updateWater, field, up
       <OptionCard result={result} previous={field.previous} t={t} language={language} controls={selected.option.id === result.option.id ? simulation : undefined} />
       <MethodDetails result={result} bundle={bundle} weather={weather} language={language} t={t} />
     </article>)}
+    <PriorityReview context={context} update={updateContext} t={t} language={language} />
+    <ContextEditor context={context} update={updateContext} t={t} language={language} />
+    <LocalResearchComparison t={t} language={language} priority={context.researchPriority} setPriority={researchPriority => updateContext({ ...context, researchPriority })} />
     <div className="result-actions no-print"><button className="primary" type="button" onClick={() => window.print()}>{t('احفظ خطتي PDF', 'Save my plan as PDF')}</button>
       <button type="button" onClick={edit}>{t('عدّل المدخلات', 'Edit inputs')}</button>
-      <button type="button" className="text-button" onClick={() => downloadPlan(bundle, results, water, field.previous)}>{t('نزّل ملف التتبع', 'Download audit file')}</button></div>
+      <button type="button" className="text-button" onClick={() => downloadPlan(bundle, results, water, field.previous, context)}>{t('نزّل ملف التتبع', 'Download audit file')}</button></div>
     <p className="print-footnote">{t('الخطة والمواعيد افتراضية للبحث قبل الموسم. الطقس تاريخي شبكي، والمراحل والكفاءة افتراضات معلنة. يتطلب الاعتماد الزراعي تحققًا محليًا. بُني النموذج الأولي بمساعدة Claude وCodex؛ بيانات المصدر من NASA.', 'This is a pre-season planning scenario. Weather is historical and gridded. Stages and efficiency are disclosed assumptions. Agronomic use needs local validation. Claude and Codex assisted this prototype; source records come from NASA.')}</p>
   </section>;
 }

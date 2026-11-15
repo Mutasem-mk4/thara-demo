@@ -2,6 +2,7 @@
 import { utcDate, windowDays, type DateWindow } from './climate';
 
 export type SupplyInput =
+  | { mode: 'not_entered' }
   | { mode: 'unknown' }
   | { mode: 'volume'; cubicMetres: string }
   | { mode: 'flow'; litresPerSecond: string; hours: string };
@@ -29,7 +30,7 @@ function nonNegative(input: string) {
 }
 
 export function volumePerTurn(input: SupplyInput): number | null {
-  if (input.mode === 'unknown') return null;
+  if (input.mode === 'unknown' || input.mode === 'not_entered') return null;
   if (input.mode === 'volume') return nonNegative(input.cubicMetres);
   const flow = nonNegative(input.litresPerSecond);
   const hours = nonNegative(input.hours);

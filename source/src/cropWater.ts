@@ -9,6 +9,7 @@ import { buildWaterCalendar, volumePerTurn, type SupplyInput } from './waterPlan
 export type SeasonOption = { id: string; crop: string; planting: string };
 export type WaterInput = {
   area: string; weekdays: number[]; supply: SupplyInput; efficiencyMode: 'gross' | 'adjusted'; efficiencyPercent: string;
+  areaState?: 'not_entered' | 'unknown' | 'reported'; daysState?: 'not_entered' | 'unknown' | 'reported';
 };
 export type Range = { median: number; minimum: number; maximum: number; count: number };
 export type SeasonYear = {

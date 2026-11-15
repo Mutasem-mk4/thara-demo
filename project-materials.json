@@ -92,14 +92,16 @@
     ]
   },
   "materials": {
-    "rebuild_pptx": "materials/THARA_Rebuild_EN.pptx",
-    "rebuild_pdf": "materials/THARA_Rebuild_EN.pdf",
+    "current_pptx": "materials/THARA_Final_EN.pptx",
+    "current_pdf": "materials/THARA_Final_EN.pdf",
     "ai_disclosure": "ai-usage.json",
     "licenses_and_attribution": "third-party-notices.txt",
     "demo": "Rebuild English presentation with genuine captured application screenshots, source notes and AI disclosure. Earlier delivery files retain historical scope.",
     "current_app": "No decorative photographic, video or audio assets. Interactive OpenStreetMap views and app-generated charts appear when requested."
   },
   "model": {
+    "optional_context": "Priority reorders explanations only. Optional user notes and separately documented soil ECe / irrigation-water ECw appear in review, print and audit; neither EC measurement changes ETc or produces suitability.",
+    "local_research_comparison": "Separate fictional forage case: unknown baseline, sorghum_vetch and sesbania_barley, documented by LENSES D2.2 section 3.1.1. Exact dates and whole-cycle water demand unavailable. Potential soil mechanisms are general, not measured local effects. No vegetable coefficients are transferred.",
     "method": "FAO-56 Eq. 9, 21–25 and 52 (Hargreaves) and ETc = Kc × ETo",
     "crop_profiles": "Seven generic FAO-56 Table 11/12 profiles with disclosed stage/parameter choices. Okra and other crops show weather only.",
     "uncertainty": "Median and min–max of complete shared historical seasons. Explicit Kc ±10% sensitivity. No field calibration.",

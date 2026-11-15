@@ -9,10 +9,12 @@ import { referenceWeather } from './eto';
 import { useHistory } from './history';
 import { FieldSetup, OptionsEditor, WaterEditor, type FieldInput } from './PlannerInput';
 import { Result } from './Result';
+import { ContextEditor } from './FieldContextPanel';
+import { newPlanningContext } from './planningContext';
 
 type Step = 'welcome' | 'field' | 'water' | 'options' | 'result';
 const steps: Step[] = ['field', 'water', 'options', 'result'];
-const emptyWater: WaterInput = { area: '', weekdays: [], supply: { mode: 'unknown' }, efficiencyMode: 'gross', efficiencyPercent: '' };
+const emptyWater: WaterInput = { area: '', areaState: 'not_entered', weekdays: [], daysState: 'not_entered', supply: { mode: 'not_entered' }, efficiencyMode: 'gross', efficiencyPercent: '' };
 
 function Brand({ home }: { home: () => void }) {
   return <button type="button" className="brand" onClick={home} aria-label="THARA">
@@ -32,6 +34,7 @@ export default function App() {
   const [options, setOptions] = useState<SeasonOption[]>([{ id: 'first', crop: '', planting: '' }]);
   const [isExample, setExample] = useState(false);
   const [revision, setRevision] = useState(0);
+  const [context, setContext] = useState(newPlanningContext);
   const t = translation(language);
   const readyForWeather = step === 'water' || step === 'options' || step === 'result';
   const climate = useHistory(readyForWeather ? field.point : null, isExample, revision);
@@ -61,14 +64,16 @@ export default function App() {
   }, []);
 
   function startExample() {
+    setContext(newPlanningContext());
     setField({ point: { ...REFERENCE_POINT, area: 'deir-alla' }, previous: 'tomato' });
-    setWater({ area: '4', weekdays: [0, 4], supply: { mode: 'volume', cubicMetres: '30' }, efficiencyMode: 'gross', efficiencyPercent: '' });
+    setWater({ area: '4', areaState: 'reported', weekdays: [0, 4], daysState: 'reported', supply: { mode: 'volume', cubicMetres: '30' }, efficiencyMode: 'gross', efficiencyPercent: '' });
     setOptions([{ id: 'first', crop: 'zucchini', planting: '2027-03-01' }, { id: 'second', crop: 'tomato', planting: '2027-03-01' }]);
     setExample(true); setStep('result');
   }
 
   function startOwnField() {
     if (isExample) {
+      setContext(newPlanningContext());
       setField({ point: null, previous: '' }); setWater(emptyWater);
       setOptions([{ id: 'first', crop: '', planting: '' }]);
     }
@@ -87,13 +92,13 @@ export default function App() {
       {step === 'welcome' && <section className="welcome">
         <p className="intro-kicker">{t('منطقة أرضك. محصولك. دور الميّ.', 'Your field. Your crop. Your water turns.')}</p>
         <h1 id="page-title" tabIndex={-1}>{t('هل يكفي دور الميّ لمحصولك القادم؟', 'Will your water turn cover your next crop?')}</h1>
-        <p className="welcome-lead">{t('قارن محصولين أو أكثر قبل الزراعة. ثرى تربط حرارة منطقتك في عشر سنوات من NASA POWER بتقدير استهلاك المحصول بين أدوار الميّ.', 'Compare crop and planting options before the season. THARA connects ten years of NASA POWER temperature with an estimate of crop water use between your turns.')}</p>
+        <p className="welcome-lead">{t('ثرى تساعد مزارع الخضار المكشوفة يقارن المحصول وموعده بدور الميّ، باستخدام حرارة عشر سنوات من NASA POWER وتقدير FAO لاستهلاك المحصول.', 'THARA helps open-field vegetable growers compare crops and planting dates against their water turns, using ten years of NASA POWER temperatures and published FAO crop-water estimates.')}</p>
         <div className="welcome-actions"><button className="primary" type="button" onClick={startOwnField}>{t('ابدأ بقطعتي', 'Start with my field')}</button>
           <button type="button" onClick={startExample}>{t('شوف مثال دير علا', 'See the Deir Alla example')}</button></div>
         <p className="welcome-note">{t('مثال جاهز ببيانات محفوظة. تقدير استرشادي من طقس سابق، مع مدخلات وافتراضات واضحة.', 'A saved-data example is ready. Estimates use past weather with disclosed inputs and assumptions.')}</p>
         <div className="welcome-flow"><p>{t('حدّد الأرض', 'Choose a field')}</p><span aria-hidden="true">←</span><p>{t('سجّل الدور', 'Enter water turns')}</p><span aria-hidden="true">←</span><p>{t('قارن خياراتك', 'Compare options')}</p></div>
       </section>}
-      {step === 'field' && <FieldSetup field={field} update={setField} area={water.area} updateArea={area => setWater(current => ({ ...current, area }))}
+      {step === 'field' && <FieldSetup field={field} update={setField} area={water.area} areaState={water.areaState} updateArea={(area, areaState) => setWater(current => ({ ...current, area, areaState: areaState ?? (area.trim() ? 'reported' : 'not_entered') }))}
         next={() => { setExample(false); setStep('water'); }} t={t} language={language} />}
       {step === 'water' && <section className="input-step"><header className="step-title"><p>{t('دور الميّ', 'Water turns')}</p><h1 id="page-title" tabIndex={-1}>{t('متى بتوصل، وقديش بتعطيك؟', 'When does water arrive, and how much?')}</h1></header>
         <form onSubmit={event => { event.preventDefault(); setStep('options'); }}><WaterEditor water={water} update={setWater} t={t} language={language} />
@@ -101,17 +106,18 @@ export default function App() {
         </form></section>}
       {step === 'options' && <section className="input-step"><header className="step-title"><p>{t('خيارات الزراعة', 'Planting options')}</p><h1 id="page-title" tabIndex={-1}>{t('شو ناوي تزرع، ومتى؟', 'What might you plant, and when?')}</h1><p>{t('ابدأ بخيار، وأضف لحد ثلاثة للمقارنة.', 'Start with one option and add up to three to compare.')}</p></header>
         <form onSubmit={event => { event.preventDefault(); setStep('result'); }}><OptionsEditor options={options} update={setOptions} t={t} language={language} />
+          <ContextEditor context={context} update={setContext} t={t} language={language} />
           <div className="step-actions"><button className="primary">{t('احسب وقارن', 'Calculate and compare')}</button><button type="button" className="text-button" onClick={() => setStep('water')}>{t('رجوع', 'Back')}</button></div>
         </form></section>}
       {step === 'result' && climate.loading && <section className="loading-state" role="status"><h1 id="page-title" tabIndex={-1}>{t('بنحضّر المقارنة', 'Preparing your comparison')}</h1><p>{isExample ? t('بنقرأ سجل دير علا المحفوظ…', 'Reading the saved Deir Alla record…') : t('بنجيب طقس عشر سنوات لمنطقتك من NASA POWER…', 'Retrieving ten years of NASA POWER weather for your location…')}</p><progress aria-label={t('تحميل البيانات', 'Loading data')} /></section>}
       {step === 'result' && climate.error && <section className="error-state" role="alert"><h1 id="page-title" tabIndex={-1}>{t('بيانات هالموقع مش متاحة الآن', 'Weather for this location is unavailable')}</h1><p>{t('جرّب الجلب مرة ثانية، أو افتح مثال دير علا المحفوظ.', 'Try retrieving the data again, or open the saved Deir Alla example.')}</p><div className="inline-actions"><button className="primary" onClick={() => setRevision(value => value + 1)}>{t('حاول مرة ثانية', 'Try again')}</button><button onClick={startExample}>{t('شوف مثال دير علا', 'See the Deir Alla example')}</button><button onClick={() => setStep('field')}>{t('غيّر الموقع', 'Change location')}</button></div></section>}
       {step === 'result' && results && climate.bundle && weather && <Result results={results} bundle={climate.bundle} weather={weather} water={water} updateWater={setWater}
-        field={field} updateOptions={setOptions} edit={() => setStep('field')} example={isExample} t={t} language={language} />}
+        field={field} updateOptions={setOptions} edit={() => setStep('field')} example={isExample} context={context} updateContext={setContext} t={t} language={language} />}
     </main>
     <footer className="app-footer"><span>THARA · Team Thara<br /><small>{t('واجهة وعلامة ثرى بمساعدة AI', 'AI-assisted interface and THARA mark')}</small></span><details className="disclosure"><summary>{t('المنهج والمصادر وإفصاح AI', 'Methods, sources and AI disclosure')}</summary>
       <p>{t('الحاجة للأداة واستخدامها الميداني لم يُختبرا مع مزارع. بيانات NASA حقيقية، وFAO تقدّم معاملات عامة تحتاج معايرة محلية. ساعد Claude وCodex في التخطيط والكود والحسابات والنصوص والاختبارات.', 'Farmer demand and field use remain untested. NASA records are authentic. FAO provides generic parameters needing local calibration. Claude and Codex assisted planning, code, calculations, copy and tests.')}</p>
       <p><a href="https://www.fao.org/4/x0490e/x0490e07.htm">FAO-56 · Hargreaves</a> · <a href="https://www.fao.org/4/x0490e/x0490e0b.htm">FAO-56 · Kc</a> · <a href="https://power.larc.nasa.gov/docs/services/api/temporal/daily/">NASA POWER</a></p>
-      <p>{t('حالة LENSES للأعلاف في دير علا مرجع بحثي سابق. النسخة الحالية تركّز على الخضار.', 'The LENSES forage case at Deir Alla is prior research context. This version focuses on vegetables.')}</p>
+      <p>{t('المسار الرئيسي للخضار. حالة LENSES تعرض تتابعات أعلاف منشورة في مقارنة بحثية مستقلة، دون نقل حسابات الخضار إليها.', 'The main journey concerns vegetables. The separate LENSES research comparison shows published forage sequences, without transferring vegetable estimates to them.')}</p>
       <p><a href={import.meta.env.BASE_URL + 'ai-usage.json'}>{t('إفصاح AI', 'AI disclosure')}</a> · <a href={import.meta.env.BASE_URL + 'project-materials.json'}>{t('كل المواد والأدوات', 'Materials and tools')}</a> · <a href={import.meta.env.BASE_URL + 'third-party-notices.txt'}>{t('التراخيص', 'Licenses')}</a></p>
     </details></footer>
   </div>;
