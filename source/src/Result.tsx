@@ -77,10 +77,10 @@ export function Result({ results, bundle, weather, water, updateWater, field, up
     </article>)}
     <PriorityReview context={context} update={updateContext} t={t} language={language} />
     <ContextEditor context={context} update={updateContext} t={t} language={language} />
+    <p className="print-footnote">{t('الخطة والمواعيد افتراضية للبحث قبل الموسم. الطقس تاريخي شبكي، والمراحل والكفاءة افتراضات معلنة. يتطلب الاعتماد الزراعي تحققًا محليًا. بُني النموذج الأولي بمساعدة Claude وCodex؛ بيانات المصدر من NASA.', 'This is a pre-season planning scenario. Weather is historical and gridded. Stages and efficiency are disclosed assumptions. Agronomic use needs local validation. Claude and Codex assisted this prototype; source records come from NASA.')}</p>
     <LocalResearchComparison t={t} language={language} priority={context.researchPriority} setPriority={researchPriority => updateContext({ ...context, researchPriority })} />
     <div className="result-actions no-print"><button className="primary" type="button" onClick={() => window.print()}>{t('احفظ خطتي PDF', 'Save my plan as PDF')}</button>
       <button type="button" onClick={edit}>{t('عدّل المدخلات', 'Edit inputs')}</button>
       <button type="button" className="text-button" onClick={() => downloadPlan(bundle, results, water, field.previous, context)}>{t('نزّل ملف التتبع', 'Download audit file')}</button></div>
-    <p className="print-footnote">{t('الخطة والمواعيد افتراضية للبحث قبل الموسم. الطقس تاريخي شبكي، والمراحل والكفاءة افتراضات معلنة. يتطلب الاعتماد الزراعي تحققًا محليًا. بُني النموذج الأولي بمساعدة Claude وCodex؛ بيانات المصدر من NASA.', 'This is a pre-season planning scenario. Weather is historical and gridded. Stages and efficiency are disclosed assumptions. Agronomic use needs local validation. Claude and Codex assisted this prototype; source records come from NASA.')}</p>
   </section>;
 }
