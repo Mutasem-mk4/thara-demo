@@ -1,0 +1,13 @@
+
+> thara-space-apps@0.1.0 test
+> vitest run
+
+
+ RUN  v5.1.0 C:/Users/User/Documents/Codex/2026-11-13/thara-vega-jo-nasa-space-apps/thara
+
+
+ Test Files  6 passed (6)
+      Tests  48 passed (48)
+   Start at  22:10:37
+   Duration  500ms (import 36%, tests 32%, transform 27%, worker 5%)
+

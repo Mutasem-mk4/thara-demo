@@ -4,6 +4,8 @@
 
 This section describes the current interface. Earlier sections below are historical records for superseded versions.
 
+Final build/test output is in evidence/rebuild/tests-final.txt and build-final.txt. The final public browser pass at 22:15 Amman is in evidence/rebuild/public/browser-rebuild.json. The published NASA bytes and slide download hashes were also checked. Source and public links are in DEPLOYMENT.md.
+
 - `npm test`: **48 tests passed across six files**. The original climate tests remain. Added checks cover FAO radiation Example 8, Hargreaves arithmetic and missing values; Kc stages; m³/dunum conversion; explicit efficiency; unknown versus zero; complete intervals; shared reference years; leap-day and cross-year boundaries; crop/date/weekday/volume changes; unsupported crop models; exact-point saved fallback.
 - `npm run build`: TypeScript and Vite production build passed.
 - Ran the production bundle in headless Microsoft Edge through Playwright, with an emulated Pixel 7 in Arabic and a 1440×900 desktop in English. The saved example loaded two modeled options and ten complete shared seasons. Initial displayed peak-interval ratios were **27% for zucchini and 22% for tomato**, using the explicitly fictional 4-dunum field, 30 m³ per turn, Sunday/Thursday and 1 March 2027 planting.

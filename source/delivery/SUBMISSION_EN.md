@@ -51,4 +51,11 @@ Next: observe a grower using the comparison, check whether they can explain the 
 
 ## Submission assets
 
+- Final project: https://mutasem-mk4.github.io/thara-demo/?lang=en
+- Demo presentation: https://mutasem-mk4.github.io/thara-demo/materials/THARA_Rebuild_EN.pdf
+- Editable deck: https://mutasem-mk4.github.io/thara-demo/materials/THARA_Rebuild_EN.pptx
+- Actual project image: https://mutasem-mk4.github.io/thara-demo/materials/project-image.png
+- Source: https://github.com/Mutasem-mk4/thara-demo/tree/main/source
+- Review materials: https://mutasem-mk4.github.io/thara-demo/materials/
+
 Use the seven-slide **THARA_Rebuild_EN** PPTX/PDF with actual UI screenshots, names and sources. The older **THARA_Demo_Team_Thara_EN** deck describes a superseded scope. No final video has been produced. Check live rules before choosing a video length. Do not link localhost or a private repo as a public demo.
