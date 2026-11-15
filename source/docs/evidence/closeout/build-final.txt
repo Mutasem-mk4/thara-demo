@@ -7,7 +7,7 @@ transforming...
 ✓ 43 modules transformed.
 rendering chunks...
 computing gzip size...
-dist/index.html                                                         3.24 kB │ gzip:  2.00 kB
+dist/index.html                                                         3.24 kB │ gzip:  2.01 kB
 dist/assets/ibm-plex-sans-arabic-latin-ext-700-normal-DWthrpRb.woff     5.10 kB
 dist/assets/ibm-plex-sans-arabic-latin-ext-400-normal-Czeyzori.woff     5.11 kB
 dist/assets/ibm-plex-sans-arabic-latin-ext-600-normal-BKJ0BLFp.woff     5.14 kB
@@ -27,8 +27,8 @@ dist/assets/ibm-plex-sans-arabic-arabic-700-normal-KReiOUqo.woff       44.38 kB
 dist/assets/ibm-plex-sans-arabic-arabic-600-normal-a0NpOJIw.woff2      45.73 kB
 dist/assets/ibm-plex-sans-arabic-arabic-600-normal-BQ7tCLaK.woff       46.83 kB
 dist/assets/FieldMap-vh-t_kPv.css                                      15.09 kB │ gzip:  6.36 kB
-dist/assets/index-B14axn7d.css                                         32.87 kB │ gzip: 12.52 kB
-dist/assets/FieldMap-Dm6iogDA.js                                      150.22 kB │ gzip: 44.22 kB
-dist/assets/index-Ce2K2fK7.js                                         313.02 kB │ gzip: 98.38 kB
+dist/assets/index-DSoC96gF.css                                         33.02 kB │ gzip: 12.54 kB
+dist/assets/FieldMap-Hfm4kedK.js                                      150.22 kB │ gzip: 44.22 kB
+dist/assets/index-Bdvg4M_q.js                                         313.02 kB │ gzip: 98.37 kB
 
-✓ built in 230ms
+✓ built in 235ms
